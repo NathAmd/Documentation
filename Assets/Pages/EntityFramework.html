@@ -1,16 +1,244 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="tags" content="C#,.NET,EntityFramework">
-    <title>EntityFramework</title>
-</head>
+<meta name="tags" content="C#,.NET,EntityFramework">
 
 <body>
     <h2>EntityFramework</h2>
-    <p>EntityFramework est un ORM pour .NET...</p>
-</body>
+    <p>EntityFramework est un ORM pour .NET qui permet de travailler avec des bases de données en utilisant des objets
+        .NET.</p>
 
-</html>
+    <div class="details">
+        <details>
+            <summary>Configuration de DbContext</summary>
+            <p>Le DbContext est la classe principale qui coordonne les fonctionnalités d'Entity Framework pour un modèle
+                de données donné.</p>
+            <ul>
+                <li>Exemple concret:
+                    <pre><code class="language-csharp">
+// Définition de la classe DbContext
+public class MyDbContext : DbContext
+{
+    // Définition des DbSet pour les entités
+    public DbSet<MyEntity> MyEntities { get; set; }
+    public DbSet<Member> Members { get; set; }
+
+    // Constructeur avec options de configuration
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+    {
+    }
+}
+                    </code></pre>
+                </li>
+                <li>Connexion avec ASP.NET:
+                    <pre><code class="language-csharp">
+// Configuration du DbContext avec ASP.NET
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseMySql("Server=localhost;Database=database;User=root;", 
+    new MySqlServerVersion(new Version(8, 0, 21))));
+                    </code></pre>
+                </li>
+                <li>Aide mémoire:
+                    <p class="metaphor">DbContext est comme un gestionnaire de connexion à la base de données.</p>
+                </li>
+            </ul>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>Entity</summary>
+            <p>Une entité représente une table dans la base de données.</p>
+            <ul>
+                <li>Exemple concret:
+                    <pre><code class="language-csharp">
+// Définition de la classe Member représentant une entité
+public class Member
+{
+    [Key] // Indique que cette propriété est la clé primaire
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Indique que la valeur est générée par la base de données
+    public int Id { get; set; }
+
+    [Required]
+    [EmailAddress]
+    public string Email { get; set; } // = ""; pour éviter le null
+
+    [Required]
+    [StringLength(50)]
+    public string Firstname { get; set; } // = ""; pour éviter le null
+}
+                    </code></pre>
+                </li>
+                <li>Aide mémoire:
+                    <p class="metaphor">Imaginez une entité comme une table SQL.</p>
+                </li>
+            </ul>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>Modifications et relations</summary>
+            <p>Entity Framework suit les modifications apportées aux entités et les enregistre dans la base de données.
+            </p>
+            <ul>
+                <li>Exemple concret:
+                    <pre><code class="language-csharp">
+// Configuration du modèle avec des données initiales et des relations
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    base.OnModelCreating(modelBuilder);
+
+    // Ajout de données initiales pour l'entité Member
+    modelBuilder.Entity<Member>().HasData(
+        new Member
+        { 
+            Id = 1, 
+            Email = "adem.Een@mail.com",
+            Firstname = "adem"
+        }
+    );
+
+    // Configuration de la relation entre Logement et Proprietaire
+    modelBuilder.Entity<Logement>()
+        .HasOne(l => l.Proprietaire) // Un Logement a un seul Proprietaire
+        .WithMany() // Un Proprietaire peut avoir plusieurs Logements
+        .HasForeignKey(l => l.ProprietaireId); // La clé étrangère dans Logement est ProprietaireId
+}
+                    </code></pre>
+                    <p>Explication :</p>
+                    <ul>
+                        <li><strong>Logement</strong> : Imaginez que c’est une entité représentant une maison ou un
+                            appartement.</li>
+                        <li><strong>Proprietaire</strong> : C’est une entité représentant une personne qui possède des
+                            logements.</li>
+                        <li><strong>Relation</strong> : Un logement a un seul propriétaire (<code
+                                class="language-csharp">HasOne</code>), mais
+                            un propriétaire peut posséder plusieurs logements (<code
+                                class="language-csharp">WithMany</code>). La clé étrangère
+                            <code class="language-csharp">ProprietaireId</code> dans l’entité <code
+                                class="language-csharp">Logement</code> est utilisée pour lier
+                            chaque logement à son propriétaire.
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>Bibliothèque de fonctions pour context.MyEntities</summary>
+            <p>Voici quelques fonctions couramment utilisées avec <code>context.MyEntities</code>:</p>
+            <ul>
+                <li>Ajouter une entité:
+                    <pre><code class="language-csharp">
+// Ajout d'une nouvelle entité
+context.MyEntities.Add(new MyEntity { Property = "value" });
+context.SaveChanges();
+                    </code></pre>
+                </li>
+                <li>Mettre à jour une entité:
+                    <pre><code class="language-csharp">
+// Recherche et mise à jour d'une entité existante
+var entity = context.MyEntities.Find(1);
+entity.Property = "new value";
+context.SaveChanges();
+                    </code></pre>
+                </li>
+                <li>Supprimer une entité:
+                    <pre><code class="language-csharp">
+// Recherche et suppression d'une entité existante
+var entity = context.MyEntities.Find(1);
+context.MyEntities.Remove(entity);
+context.SaveChanges();
+                    </code></pre>
+                </li>
+                <li>Rechercher une entité:
+                    <pre><code class="language-csharp">
+// Recherche d'une entité par son identifiant
+var entity = context.MyEntities.Find(1);
+                    </code></pre>
+                </li>
+                <li>Requêtes LINQ:
+                    <pre><code class="language-csharp">
+// Requête LINQ pour filtrer les entités
+var results = context.MyEntities
+    .Where(e => e.Property == "value")
+    .ToList();
+                    </code></pre>
+                </li>
+            </ul>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>Commandes Entity Framework et Installation de Packages</summary>
+            <p>Pour utiliser Entity Framework, vous devez installer les packages nécessaires et connaître quelques
+                commandes
+                utiles.</p>
+            <ul>
+                <li>Installation de Entity Framework Core:
+                    <pre><code class="language-csharp">
+    // Installation via NuGet Package Manager Console
+    Install-Package Microsoft.EntityFrameworkCore
+    
+    // Installation via .NET CLI
+    dotnet add package Microsoft.EntityFrameworkCore
+                    </code></pre>
+                </li>
+                <li>Installation de Entity Framework Core Tools:
+                    <pre><code class="language-csharp">
+    // Installation via NuGet Package Manager Console
+    Install-Package Microsoft.EntityFrameworkCore.Tools
+    
+    // Installation via .NET CLI
+    dotnet add package Microsoft.EntityFrameworkCore.Tools
+                    </code></pre>
+                </li>
+                <li>Création d'une migration:
+                    <pre><code class="language-csharp">
+    // Via NuGet Package Manager Console
+    Add-Migration InitialCreate
+    
+    // Via .NET CLI
+    dotnet ef migrations add InitialCreate
+                    </code></pre>
+                </li>
+                <li>Application des migrations à la base de données:
+                    <pre><code class="language-csharp">
+    // Via NuGet Package Manager Console
+    Update-Database
+    
+    // Via .NET CLI
+    dotnet ef database update
+                    </code></pre>
+                </li>
+                <li>Liste des migrations:
+                    <pre><code class="language-csharp">
+    // Via NuGet Package Manager Console
+    Get-Migrations
+    
+    // Via .NET CLI
+    dotnet ef migrations list
+                    </code></pre>
+                </li>
+                <li>Suppression de la dernière migration:
+                    <pre><code class="language-csharp">
+    // Via NuGet Package Manager Console
+    Remove-Migration
+    
+    // Via .NET CLI
+    dotnet ef migrations remove
+                    </code></pre>
+                </li>
+                <li>Aide mémoire:
+                    <p class="metaphor">Pensez aux migrations comme à des versions de votre schéma de base de données.
+                        Chaque migration représente un changement ou une mise à jour.</p>
+                </li>
+            </ul>
+        </details>
+    </div>
+
+
+    <!-- Ajoutez d'autres sections de fonctionnalités ici -->
+
+</body>

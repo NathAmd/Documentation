@@ -1,0 +1,399 @@
+<meta name="tags" content="SQL">
+
+<h2>Documentation Complète sur SQL</h2>
+<p>Cette documentation couvre les commandes et fonctionnalités globales de SQL, ainsi que les spécificités pour MySQL,
+    SQL Server, SQLite, et plus encore. Une section spéciale est dédiée aux structures de données.</p>
+
+<body>
+    <div class="details">
+        <details>
+            <summary>Commandes SQL de Base</summary>
+            <p>Les commandes SQL de base permettent de lire, insérer, modifier et supprimer des données dans une base de
+                données.</p>
+            <ul>
+                <li>SELECT:
+                    <pre><code class="language-sql">
+-- Sélectionner toutes les colonnes d'une table
+SELECT * FROM table_name;
+
+-- Sélectionner des colonnes spécifiques
+SELECT column1, column2 FROM table_name;
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>La commande SELECT est utilisée pour récupérer des données d'une base de données.</p>
+                    </details>
+                </li>
+                <li>INSERT INTO:
+                    <pre><code class="language-sql">
+-- Insérer des données dans une table
+INSERT INTO table_name (column1, column2) VALUES (value1, value2);
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>La commande INSERT INTO est utilisée pour ajouter de nouvelles lignes dans une table.</p>
+                    </details>
+                </li>
+                <li>UPDATE:
+                    <pre><code class="language-sql">
+-- Mettre à jour des données dans une table
+UPDATE table_name SET column1 = value1, column2 = value2 WHERE condition;
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>La commande UPDATE est utilisée pour modifier des données existantes dans une table.</p>
+                    </details>
+                </li>
+                <li>DELETE:
+                    <pre><code class="language-sql">
+-- Supprimer des données d'une table
+DELETE FROM table_name WHERE condition;
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>La commande DELETE est utilisée pour supprimer des lignes d'une table.</p>
+                    </details>
+                </li>
+                <li>CREATE TABLE:
+                    <pre><code class="language-sql">
+-- Créer une nouvelle table
+CREATE TABLE table_name (
+    column1 datatype,
+    column2 datatype,
+    ...
+);
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>La commande CREATE TABLE est utilisée pour créer une nouvelle table dans la base de données.
+                        </p>
+                    </details>
+                </li>
+                <li>DROP TABLE:
+                    <pre><code class="language-sql">
+-- Supprimer une table
+DROP TABLE table_name;
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>La commande DROP TABLE est utilisée pour supprimer une table de la base de données.</p>
+                    </details>
+                </li>
+            </ul>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>Fonctions SQL</summary>
+            <p>Les fonctions SQL permettent de manipuler et d'analyser les données de manière plus avancée.</p>
+            <ul>
+                <li>Fonctions de chaîne:
+                    <pre><code class="language-sql">
+-- Convertir une chaîne en majuscules
+SELECT UPPER(column_name) FROM table_name;
+
+-- Extraire une sous-chaîne
+SELECT SUBSTRING(column_name, start, length) FROM table_name;
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>Les fonctions de chaîne permettent de manipuler les chaînes de caractères.</p>
+                    </details>
+                </li>
+                <li>Fonctions numériques:
+                    <pre><code class="language-sql">
+-- Calculer la somme d'une colonne
+SELECT SUM(column_name) FROM table_name;
+
+-- Calculer la moyenne d'une colonne
+SELECT AVG(column_name) FROM table_name;
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>Les fonctions numériques permettent de réaliser des calculs sur les données numériques.</p>
+                    </details>
+                </li>
+                <li>Fonctions de date:
+                    <pre><code class="language-sql">
+-- Obtenir la date actuelle
+SELECT CURRENT_DATE;
+
+-- Ajouter des jours à une date
+SELECT DATE_ADD(column_name, INTERVAL 10 DAY) FROM table_name;
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>Les fonctions de date permettent de manipuler les valeurs de date et d'heure.</p>
+                    </details>
+                </li>
+                <li>Fonctions d'agrégation:
+                    <pre><code class="language-sql">
+-- Compter le nombre de lignes
+SELECT COUNT(*) FROM table_name;
+
+-- Trouver la valeur maximale
+SELECT MAX(column_name) FROM table_name;
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>Les fonctions d'agrégation permettent de réaliser des calculs sur un ensemble de valeurs.</p>
+                    </details>
+                </li>
+            </ul>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>Structures de Données en SQL</summary>
+            <p>Les structures de données en SQL sont essentielles pour organiser et optimiser les bases de données.</p>
+            <ul>
+                <li>Types de données:
+                    <pre><code class="language-sql">
+-- Types de données courants
+INTEGER, VARCHAR(n), DATE, BOOLEAN, FLOAT
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>Les types de données déterminent le type de données pouvant être stocké dans une colonne.</p>
+                    </details>
+                </li>
+                <li>Clés primaires et étrangères:
+                    <pre><code class="language-sql">
+-- Définir une clé primaire
+CREATE TABLE table_name (
+    column1 datatype PRIMARY KEY,
+    column2 datatype
+);
+
+-- Définir une clé étrangère
+CREATE TABLE table_name (
+    column1 datatype,
+    column2 datatype,
+    FOREIGN KEY (column1) REFERENCES other_table(column)
+);
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>Les clés primaires et étrangères sont utilisées pour garantir l'intégrité des données et
+                            établir des relations entre les tables.</p>
+                    </details>
+                </li>
+                <li>Index:
+                    <pre><code class="language-sql">
+-- Créer un index
+CREATE INDEX index_name ON table_name (column_name);
+
+-- Créer un index unique
+CREATE UNIQUE INDEX index_name ON table_name (column_name);
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>Les index améliorent les performances des requêtes en permettant un accès plus rapide aux
+                            données.</p>
+                    </details>
+                </li>
+            </ul>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>Spécificités MySQL</summary>
+            <p>MySQL est un système de gestion de base de données relationnelle open-source très populaire.</p>
+            <ul>
+                <li>Fonctions spécifiques:
+                    <pre><code class="language-sql">
+-- Fonction pour obtenir la version de MySQL
+SELECT VERSION();
+
+-- Fonction pour obtenir la date et l'heure actuelles
+SELECT NOW();
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>MySQL offre des fonctions spécifiques pour interagir avec le système de base de données.</p>
+                    </details>
+                </li>
+                <li>Types de données spécifiques:
+                    <pre><code class="language-sql">
+-- Type de données JSON
+JSON
+
+-- Type de données ENUM
+ENUM('value1', 'value2', 'value3')
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>MySQL propose des types de données spécifiques pour répondre à des besoins particuliers.</p>
+                    </details>
+                </li>
+            </ul>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>Spécificités SQL Server</summary>
+            <p>SQL Server est un système de gestion de base de données relationnelle développé par Microsoft.</p>
+            <ul>
+                <li>Fonctions spécifiques:
+                    <pre><code class="language-sql">
+-- Fonction pour obtenir la version de SQL Server
+SELECT @@VERSION;
+
+-- Fonction pour obtenir la date et l'heure actuelles
+SELECT GETDATE();
+                </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>SQL Server offre des fonctions spécifiques pour interagir avec le système de base de données.
+                        </p>
+                    </details>
+                </li>
+                <li>Types de données spécifiques:
+                    <pre><code class="language-sql">
+-- Type de données UNIQUEIDENTIFIER
+UNIQUEIDENTIFIER
+
+-- Type de données DATETIME2
+DATETIME2
+                </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>SQL Server propose des types de données spécifiques pour répondre à des besoins particuliers.
+                        </p>
+                    </details>
+                </li>
+            </ul>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>Spécificités SQLite</summary>
+            <p>SQLite est un système de gestion de base de données relationnelle léger et intégré.</p>
+            <ul>
+                <li>Fonctions spécifiques:
+                    <pre><code class="language-sql">
+-- Fonction pour obtenir la version de SQLite
+SELECT sqlite_version();
+
+-- Fonction pour obtenir la date et l'heure actuelles
+SELECT datetime('now');
+                </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>SQLite offre des fonctions spécifiques pour interagir avec le système de base de données.</p>
+                    </details>
+                </li>
+                <li>Types de données spécifiques:
+                    <pre><code class="language-sql">
+-- Type de données INTEGER
+INTEGER
+
+-- Type de données TEXT
+TEXT
+                </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>SQLite propose des types de données spécifiques pour répondre à des besoins particuliers.</p>
+                    </details>
+                </li>
+            </ul>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>Spécificités PostgreSQL</summary>
+            <p>PostgreSQL est un système de gestion de base de données relationnelle open-source avancé.</p>
+            <ul>
+                <li>Fonctions spécifiques:
+                    <pre><code class="language-sql">
+-- Fonction pour obtenir la version de PostgreSQL
+SELECT version();
+
+-- Fonction pour obtenir la date et l'heure actuelles
+SELECT current_timestamp;
+                </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>PostgreSQL offre des fonctions spécifiques pour interagir avec le système de base de données.
+                        </p>
+                    </details>
+                </li>
+                <li>Types de données spécifiques:
+                    <pre><code class="language-sql">
+-- Type de données JSONB
+JSONB
+
+-- Type de données SERIAL
+SERIAL
+                </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>PostgreSQL propose des types de données spécifiques pour répondre à des besoins particuliers.
+                        </p>
+                    </details>
+                </li>
+            </ul>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>Structures de Données en SQL</summary>
+            <p>Les structures de données en SQL sont essentielles pour organiser et optimiser les bases de données.</p>
+            <ul>
+                <li>Types de données:
+                    <pre><code class="language-sql">
+-- Types de données courants
+INTEGER, VARCHAR(n), DATE, BOOLEAN, FLOAT
+                </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>Les types de données déterminent le type de données pouvant être stocké dans une colonne.</p>
+                    </details>
+                </li>
+                <li>Clés primaires et étrangères:
+                    <pre><code class="language-sql">
+-- Définir une clé primaire
+CREATE TABLE table_name (
+    column1 datatype PRIMARY KEY,
+    column2 datatype
+);
+
+-- Définir une clé étrangère
+CREATE TABLE table_name (
+    column1 datatype,
+    column2 datatype,
+    FOREIGN KEY (column1) REFERENCES other_table(column)
+);
+                </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>Les clés primaires et étrangères sont utilisées pour garantir l'intégrité des données et
+                            établir
+                            des relations entre les tables.</p>
+                    </details>
+                </li>
+                <li>Index:
+                    <pre><code class="language-sql">
+-- Créer un index
+CREATE INDEX index_name ON table_name (column_name);
+
+-- Créer un index unique
+CREATE UNIQUE INDEX index_name ON table_name (column_name);
+                </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>Les index améliorent les performances des requêtes en permettant un accès plus rapide aux
+                            données.</p>
+                    </details>
+                </li>
+            </ul>
+        </details>
+    </div>
+</body>

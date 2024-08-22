@@ -20,6 +20,8 @@ header {
 #content {
     flex-grow: 1;
     padding: 2rem;
+    margin: 0 0 5rem 0;
+        height: fit-content;
 }
 
 footer {
@@ -52,7 +54,7 @@ footer {
 }
 
 #sidebar .child-tags {
-    padding-left: 1rem;
+    padding-left: 0.25rem;
 }
 
 #sidebar .child-tag {
@@ -73,7 +75,7 @@ footer {
 }
 
 .tag-text.hover {
-    background-color: #f0f0f0;
+    background-color: #cbcbcb;
 }
 
 .tag-text.highlight {
@@ -83,4 +85,20 @@ footer {
 /* Child Tags */
 .child-tags {
     margin-left: 20px;
+}
+/* page */
+
+.details {
+    margin-bottom: 10px;
+}
+
+summary {
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+summary:hover {
+    background-color: #cbcbcb;
+    border-radius: 0.5rem;
 }

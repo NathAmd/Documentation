@@ -1,0 +1,460 @@
+<meta name="tags" content="C#,.NET">
+
+<h2>.NET</h2>
+<p>Les commandes et fonctionnalités globales de .NET, ainsi qu'une section spéciale pour les
+    structures de serveur et les threads.</p>
+
+<body>
+    <div class="details">
+        <details>
+            <summary>Commandes .NET de Base</summary>
+            <p>Les commandes .NET de base permettent de gérer les projets, les solutions et les applications .NET.</p>
+            <ul>
+                <li>dotnet new:
+                    <pre><code class="language-bash">
+# Créer un nouveau projet .NET
+dotnet new console -n MyConsoleApp
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>La commande <code>dotnet new</code> est utilisée pour créer un nouveau projet ou fichier
+                            .NET.</p>
+                    </details>
+                </li>
+                <li>dotnet build:
+                    <pre><code class="language-bash">
+# Compiler un projet .NET
+dotnet build MyConsoleApp
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>La commande <code>dotnet build</code> compile le projet .NET spécifié.</p>
+                    </details>
+                </li>
+                <li>dotnet run:
+                    <pre><code class="language-bash">
+# Exécuter un projet .NET
+dotnet run --project MyConsoleApp
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>La commande <code>dotnet run</code> exécute le projet .NET spécifié.</p>
+                    </details>
+                </li>
+                <li>dotnet test:
+                    <pre><code class="language-bash">
+# Exécuter les tests unitaires d'un projet .NET
+dotnet test MyTestProject
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>La commande <code>dotnet test</code> exécute les tests unitaires du projet .NET spécifié.</p>
+                    </details>
+                </li>
+                <li>dotnet publish:
+                    <pre><code class="language-bash">
+# Publier un projet .NET
+dotnet publish MyConsoleApp -c Release -o ./publish
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>La commande <code>dotnet publish</code> compile le projet et le prépare pour le déploiement.
+                        </p>
+                    </details>
+                </li>
+            </ul>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>Fonctionnalités Globales de .NET</summary>
+            <p>.NET offre de nombreuses fonctionnalités pour le développement d'applications robustes et performantes.
+            </p>
+            <ul>
+                <li>Entity Framework Core:
+                    <pre><code class="language-csharp">
+// Exemple d'Entity Framework Core en C#
+public class BloggingContext : DbContext
+{
+    public DbSet<Blog> Blogs { get; set; }
+}
+
+public class Blog
+{
+    public int BlogId { get; set; }
+    public string Url { get; set; }
+}
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>Entity Framework Core est un ORM (Object-Relational Mapper) pour .NET, facilitant l'accès aux
+                            bases de données.</p>
+                    </details>
+                </li>
+                <li>ASP.NET Core:
+                    <pre><code class="language-csharp">
+// Exemple d'ASP.NET Core en C#
+public class Startup
+{
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddControllers();
+    }
+
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        if (env.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+        }
+
+        app.UseRouting();
+
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+        });
+    }
+}
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>ASP.NET Core est un framework pour construire des applications web modernes et performantes.
+                        </p>
+                    </details>
+                </li>
+                <li>Blazor:
+                    <pre><code class="language-cshtml">
+// Exemple de Blazor en C#
+@page "/counter"
+
+<h3>Counter</h3>
+
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+}
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>Blazor permet de construire des interfaces utilisateur interactives côté client en utilisant
+                            C# au lieu de JavaScript.</p>
+                    </details>
+                </li>
+                <li>Xamarin:
+                    <pre><code class="language-csharp">
+// Exemple de Xamarin en C#
+public class App : Application
+{
+    public App()
+    {
+        MainPage = new ContentPage
+        {
+            Content = new StackLayout
+            {
+                Children = {
+                    new Label { Text = "Welcome to Xamarin.Forms!" }
+                }
+            }
+        };
+    }
+}
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>Xamarin permet de développer des applications mobiles multiplateformes en utilisant C# et
+                            .NET.</p>
+                    </details>
+                </li>
+                <li>MAUI (Multi-platform App UI):
+                    <pre><code class="language-csharp">
+// Exemple de MAUI en C#
+public class App : MauiApp
+{
+    protected override IWindow CreateWindow(IActivationState activationState)
+    {
+        return new Microsoft.Maui.Controls.Window(new MainPage());
+    }
+}
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>MAUI est le successeur de Xamarin.Forms, permettant de créer des applications
+                            multiplateformes pour iOS, Android, macOS et Windows.</p>
+                    </details>
+                </li>
+                <li>SignalR:
+                    <pre><code class="language-csharp">
+// Exemple de SignalR en C#
+public class ChatHub : Hub
+{
+    public async Task SendMessage(string user, string message)
+    {
+        await Clients.All.SendAsync("ReceiveMessage", user, message);
+    }
+}
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>SignalR permet d'ajouter des fonctionnalités de communication en temps réel à vos
+                            applications web.</p>
+                    </details>
+                </li>
+                <li>gRPC:
+                    <pre><code class="language-csharp">
+// Exemple de gRPC en C#
+public class GreeterService : Greeter.GreeterBase
+{
+    public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
+    {
+        return Task.FromResult(new HelloReply
+        {
+            Message = "Hello " + request.Name
+        });
+    }
+}
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>gRPC est un framework RPC (Remote Procedure Call) performant et open-source développé par
+                            Google.</p>
+                    </details>
+                </li>
+            </ul>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>Structures de Serveur et Threads</summary>
+            <p>Les structures de serveur et les threads sont essentiels pour créer des applications .NET performantes et
+                évolutives.</p>
+            <ul>
+                <li>Création et démarrage d'un thread:
+                    <pre><code class="language-csharp">
+    // Création et démarrage d'un thread en C#
+    Thread thread = new Thread(new ThreadStart(MyMethod));
+    thread.Start();
+    
+    void MyMethod()
+    {
+        // Code à exécuter dans le thread
+    }
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>Vous pouvez créer et démarrer un nouveau thread en utilisant la classe <code>Thread</code> de
+                            <code>System.Threading</code>.
+                        </p>
+                    </details>
+                </li>
+                <li>Arrêt d'un thread:
+                    <pre><code class="language-csharp">
+    // Arrêt d'un thread en C#
+    CancellationTokenSource cts = new CancellationTokenSource();
+    Thread thread = new Thread(() => MyMethod(cts.Token));
+    thread.Start();
+    
+    void MyMethod(CancellationToken token)
+    {
+        while (!token.IsCancellationRequested)
+        {
+            // Code à exécuter dans le thread
+        }
+    }
+    
+    // Pour arrêter le thread
+    cts.Cancel();
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>Pour arrêter un thread de manière coopérative, utilisez <code>CancellationToken</code>.</p>
+                    </details>
+                </li>
+                <li>Utilisation de <code>Task</code> et <code>Task Parallel Library (TPL)</code>:
+                    <pre><code class="language-csharp">
+    // Utilisation de Task et TPL en C#
+    Task.Run(() => MyMethod());
+    
+    void MyMethod()
+    {
+        // Code à exécuter dans la tâche
+    }
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>La bibliothèque TPL simplifie la programmation parallèle en utilisant des tâches au lieu de
+                            threads.</p>
+                    </details>
+                </li>
+                <li>Programmation asynchrone:
+                    <pre><code class="language-csharp">
+    // Exemple de programmation asynchrone en C#
+    public async Task MyMethodAsync()
+    {
+        await Task.Delay(1000);
+        Console.WriteLine("Tâche terminée");
+    }
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>La programmation asynchrone permet d'améliorer la réactivité des applications en utilisant
+                            <code>async</code> et <code>await</code>.
+                        </p>
+                    </details>
+                </li>
+                <li>Serveur-Client avec Threads:
+                    <pre><code class="language-csharp">
+    // Exemple de serveur TCP avec threads pour chaque client
+    public class Server
+    {
+        private TcpListener _listener;
+        private bool _isRunning;
+    
+        public Server(int port)
+        {
+            _listener = new TcpListener(IPAddress.Any, port);
+        }
+    
+        public void Start()
+        {
+            _listener.Start();
+            _isRunning = true;
+            Console.WriteLine("Serveur démarré...");
+    
+            // Thread pour écouter les commandes console du serveur
+            Thread consoleThread = new Thread(ConsoleListener);
+            consoleThread.Start();
+    
+            while (_isRunning)
+            {
+                TcpClient client = _listener.AcceptTcpClient();
+                Thread clientThread = new Thread(() => HandleClient(client));
+                clientThread.Start();
+            }
+        }
+    
+        private void HandleClient(TcpClient client)
+        {
+            NetworkStream stream = client.GetStream();
+            StreamReader reader = new StreamReader(stream);
+            StreamWriter writer = new StreamWriter(stream) { AutoFlush = true };
+    
+            writer.WriteLine("Bienvenue sur le serveur!");
+    
+            string message;
+            while ((message = reader.ReadLine()) != null)
+            {
+                Console.WriteLine("Client: " + message);
+                writer.WriteLine("Message reçu: " + message);
+            }
+    
+            client.Close();
+        }
+    
+        private void ConsoleListener()
+        {
+            while (_isRunning)
+            {
+                string command = Console.ReadLine();
+                if (command.ToLower() == "exit")
+                {
+                    _isRunning = false;
+                    _listener.Stop();
+                    Console.WriteLine("Serveur arrêté.");
+                }
+            }
+        }
+    }
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>Ce code montre comment créer un serveur TCP qui utilise des threads pour gérer chaque client
+                            et
+                            un thread pour écouter les commandes console du serveur.</p>
+                    </details>
+                </li>
+            </ul>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>Utilité de .NET Vanilla</summary>
+            <p>.NET Vanilla offre une base solide pour le développement d'applications robustes et performantes. Voici
+                quelques-unes de ses principales utilités :</p>
+            <ul>
+                <li>Applications Console:
+                    <pre><code class="language-csharp">
+    // Exemple d'application console en C#
+    using System;
+    
+    class Program
+    {
+        static void Main()
+        {
+            Console.WriteLine("Hello, World!");
+        }
+    }
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>.NET Vanilla permet de créer des applications console simples et efficaces pour des tâches
+                            automatisées ou des outils de ligne de commande.</p>
+                    </details>
+                </li>
+                <li>Applications de Bureau:
+                    <pre><code class="language-csharp">
+    // Exemple d'application Windows Forms en C#
+    public class MainForm : Form
+    {
+        public MainForm()
+        {
+            Text = "Hello, Windows Forms!";
+            Button button = new Button { Text = "Click Me" };
+            button.Click += (sender, e) => MessageBox.Show("Button Clicked!");
+            Controls.Add(button);
+        }
+    }
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>.NET Vanilla permet de créer des applications de bureau avec Windows Forms ou WPF (Windows
+                            Presentation Foundation).</p>
+                    </details>
+                </li>
+                <li>Services Windows:
+                    <pre><code class="language-csharp">
+    // Exemple de service Windows en C#
+    public class MyService : ServiceBase
+    {
+        protected override void OnStart(string[] args)
+        {
+            // Code à exécuter au démarrage du service
+        }
+    
+        protected override void OnStop()
+        {
+            // Code à exécuter à l'arrêt du service
+        }
+    }
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>.NET Vanilla permet de créer des services Windows pour exécuter des tâches en arrière-plan de
+                            manière continue.</p>
+                    </details>
+                </li>
+            </ul>
+        </details>
+    </div>
+</body>

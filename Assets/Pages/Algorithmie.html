@@ -1,0 +1,226 @@
+<meta name="tags" content="C#,Algorithme">
+
+<h2>Algorithmes</h2>
+<p>description</p>
+
+<body>
+    <div class="details">
+        <details>
+            <summary>Algorithmes de tri</summary>
+            <p>Les algorithmes de tri sont utilisés pour organiser les données dans un ordre spécifique.</p>
+            <ul>
+                <li>Tri à bulles:
+                    <pre><code class="language-csharp">
+// Tri à bulles en C#
+public static void BubbleSort(int[] array) {
+    for (int i = 0; i < array.Length - 1; i++) {
+        for (int j = 0; j < array.Length - i - 1; j++) {
+            if (array[j] > array[j + 1]) {
+                int temp = array[j];
+                array[j] = array[j + 1];
+                array[j + 1] = temp;
+            }
+        }
+    }
+}
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>Le tri à bulles compare chaque paire d'éléments adjacents et les échange s'ils sont dans le
+                            mauvais ordre. Ce processus est répété jusqu'à ce que la liste soit triée.</p>
+                    </details>
+                </li>
+                <li>Tri rapide (QuickSort):
+                    <pre><code class="language-csharp">
+// Tri rapide en C#
+public static void QuickSort(int[] array, int left, int right) {
+    if (left < right) {
+        int pivot = Partition(array, left, right);
+        QuickSort(array, left, pivot - 1);
+        QuickSort(array, pivot + 1, right);
+    }
+}
+
+private static int Partition(int[] array, int left, int right) {
+    int pivot = array[right];
+    int i = left - 1;
+    for (int j = left; j < right; j++) {
+        if (array[j] < pivot) {
+            i++;
+            int temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+    }
+    int temp1 = array[i + 1];
+    array[i + 1] = array[right];
+    array[right] = temp1;
+    return i + 1;
+}
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>Le tri rapide (QuickSort) est un algorithme de tri efficace qui utilise la technique de
+                            "divide and conquer". Il sélectionne un pivot et partitionne le tableau en deux
+                            sous-tableaux, puis trie récursivement les sous-tableaux.</p>
+                    </details>
+                </li>
+                <li>Tri par insertion:
+                    <pre><code class="language-csharp">
+// Tri par insertion en C#
+public static void InsertionSort(int[] array) {
+    for (int i = 1; i < array.Length; i++) {
+        int key = array[i];
+        int j = i - 1;
+        while (j >= 0 && array[j] > key) {
+            array[j + 1] = array[j];
+            j--;
+        }
+        array[j + 1] = key;
+    }
+}
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>Le tri par insertion construit le tableau trié un élément à la fois, en insérant chaque
+                            nouvel élément à sa position correcte parmi les éléments déjà triés.</p>
+                    </details>
+                </li>
+            </ul>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>Algorithmes de recherche</summary>
+            <p>Les algorithmes de recherche sont utilisés pour trouver des éléments spécifiques dans des structures de
+                données.</p>
+            <ul>
+                <li>Recherche linéaire:
+                    <pre><code class="language-csharp">
+// Recherche linéaire en C#
+public static int LinearSearch(int[] array, int value) {
+    for (int i = 0; i < array.Length; i++) {
+        if (array[i] == value) {
+            return i;
+        }
+    }
+    return -1;
+}
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>La recherche linéaire parcourt chaque élément du tableau jusqu'à ce qu'elle trouve l'élément
+                            recherché ou atteigne la fin du tableau.</p>
+                    </details>
+                </li>
+                <li>Recherche binaire:
+                    <pre><code class="language-csharp">
+// Recherche binaire en C#
+public static int BinarySearch(int[] array, int value) {
+    int left = 0;
+    int right = array.Length - 1;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (array[mid] == value) {
+            return mid;
+        }
+        if (array[mid] < value) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return -1;
+}
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>La recherche binaire divise le tableau en deux à chaque étape, réduisant ainsi l'espace de
+                            recherche de moitié. Elle est efficace pour les tableaux triés.</p>
+                    </details>
+                </li>
+            </ul>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>Algorithmes de graphes</summary>
+            <p>Les algorithmes de graphes sont utilisés pour résoudre des problèmes liés aux graphes, comme les chemins
+                les plus courts.</p>
+            <ul>
+                <li>Algorithme de Dijkstra:
+                    <pre><code class="language-csharp">
+// Algorithme de Dijkstra en C#
+public static int[] Dijkstra(int[,] graph, int source) {
+    int verticesCount = graph.GetLength(0);
+    int[] distances = new int[verticesCount];
+    bool[] shortestPathTreeSet = new bool[verticesCount];
+
+    for (int i = 0; i < verticesCount; i++) {
+        distances[i] = int.MaxValue;
+        shortestPathTreeSet[i] = false;
+    }
+
+    distances[source] = 0;
+
+    for (int count = 0; count < verticesCount - 1; count++) {
+        int u = MinimumDistance(distances, shortestPathTreeSet);
+        shortestPathTreeSet[u] = true;
+
+        for (int v = 0; v < verticesCount; v++) {
+            if (!shortestPathTreeSet[v] && Convert.ToBoolean(graph[u, v]) && distances[u] != int.MaxValue && distances[u] + graph[u, v] < distances[v]) {
+                distances[v] = distances[u] + graph[u, v];
+            }
+        }
+    }
+
+    return distances;
+}
+
+private static int MinimumDistance(int[] distances, bool[] shortestPathTreeSet) {
+    int min = int.MaxValue;
+    int minIndex = 0;
+
+    for (int v = 0; v < distances.Length; v++) {
+        if (!shortestPathTreeSet[v] && distances[v] <= min) {
+            min = distances[v];
+            minIndex = v;
+        }
+    }
+
+    return minIndex;
+}
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>L'algorithme de Dijkstra trouve le chemin le plus court d'un sommet source à tous les autres
+                            sommets dans un graphe pondéré. Il utilise un ensemble pour suivre les sommets pour lesquels
+                            le chemin le plus court est déjà déterminé.</p>
+                    </details>
+                </li>
+                <li>Algorithme de parcours en profondeur (DFS):
+                    <pre><code class="language-csharp">
+// Algorithme de parcours en profondeur en C#
+public static void DFS(int v, bool[] visited, List<int>[] adj) {
+    visited[v] = true;
+    Console.Write(v + " ");
+
+    foreach (int i in adj[v]) {
+        if (!visited[i]) {
+            DFS(i, visited, adj);
+        }
+    }
+}
+                    </code></pre>
+                    <details>
+                        <summary>Explication</summary>
+                        <p>Le parcours en profondeur (DFS) explore autant que possible chaque branche avant de reculer.
+                            Il utilise une pile pour suivre les sommets à visiter.</p>
+                    </details>
+                </li>
+            </ul>
+        </details>
+    </div>
+</body>

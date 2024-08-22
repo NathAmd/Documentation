@@ -1,16 +1,699 @@
-<!DOCTYPE html>
-<html lang="fr">
+<meta name="tags" content="C#">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="tags" content="C#">
-    <title>C#</title>
-</head>
+<h2>Programmation en C#</h2>
+<p>Le C# est un langage de programmation moderne, orienté objet, développé par Microsoft. Il est utilisé pour
+    développer une large gamme d'applications, des applications de bureau aux applications web et mobiles.</p>
 
-<body>
-    <h2>C#</h2>
-    <p>C# est un langage de programmation...</p>
-</body>
+<div class="details">
+    <details>
+        <summary>Classes et Objets</summary>
+        <p>Les classes sont les blocs de construction de base de la programmation orientée objet en C#. Elles
+            définissent les propriétés et les méthodes que les objets créés à partir de la classe peuvent utiliser.</p>
+        <ul>
+            <li>Définition d'une classe:
+                <pre><code class="language-csharp">
+                // Définition d'une classe simple
+                public class Person
+                {
+                    // Propriétés
+                    public string FirstName { get; set; }
+                    public string LastName { get; set; }
+                    public int Age { get; set; }
+                
+                    // Constructeur par défaut
+                    public Person() { }
+                
+                    // Constructeur avec paramètres
+                    public Person(string firstName, string lastName, int age)
+                    {
+                        FirstName = firstName;
+                        LastName = lastName;
+                        Age = age;
+                    }
+                
+                    // Méthode
+                    public void DisplayFullName()
+                    {
+                        Console.WriteLine($"{FirstName} {LastName}");
+                    }
+                }
+                                </code></pre>
+            </li>
+            <li>Création d'un objet:
+                <pre><code class="language-csharp">
+                // Création d'un objet à partir de la classe Person
+                Person person = new Person
+                {
+                    FirstName = "John",
+                    LastName = "Doe",
+                    Age = 30
+                };
+                person.DisplayFullName(); // Affiche "John Doe"
+                
+                // Création d'un objet en utilisant le constructeur avec paramètres
+                Person anotherPerson = new Person("Jane", "Doe", 25);
+                anotherPerson.DisplayFullName(); // Affiche "Jane Doe"
+                                </code></pre>
+            </li>
+            <li>Aide mémoire:
+                <p class="metaphor">Pensez à une classe comme à un plan et à un objet comme à une maison construite à
+                    partir de ce plan.</p>
+            </li>
+        </ul>
+    </details>
+</div>
 
-</html>
+
+<div class="details">
+    <details>
+        <summary>Héritage</summary>
+        <p>L'héritage permet de créer une nouvelle classe qui réutilise, étend et modifie le comportement défini dans
+            une autre classe.</p>
+        <ul>
+            <li>Exemple d'héritage:
+                <pre><code class="language-csharp">
+        // Classe de base
+        public class Animal
+        {
+            public void Eat()
+            {
+                Console.WriteLine("Eating...");
+            }
+        
+            // Méthode virtuelle
+            public virtual void MakeSound()
+            {
+                Console.WriteLine("Animal sound...");
+            }
+        }
+        
+        // Classe dérivée
+        public class Dog : Animal
+        {
+            public void Bark()
+            {
+                Console.WriteLine("Barking...");
+            }
+        
+            // Surcharge de la méthode virtuelle
+            public override void MakeSound()
+            {
+                Console.WriteLine("Barking...");
+            }
+        }
+        
+        // Utilisation de l'héritage
+        Dog dog = new Dog();
+        dog.Eat(); // Hérité de Animal
+        dog.Bark(); // Défini dans Dog
+        dog.MakeSound(); // Surcharge de la méthode virtuelle
+                        </code></pre>
+            </li>
+            <li>Exemple avec classe abstraite:
+                <pre><code class="language-csharp">
+        // Classe abstraite
+        public abstract class Animal
+        {
+            public void Eat()
+            {
+                Console.WriteLine("Eating...");
+            }
+        
+            // Méthode abstraite
+            public abstract void MakeSound();
+        }
+        
+        // Classe dérivée
+        public class Dog : Animal
+        {
+            public void Bark()
+            {
+                Console.WriteLine("Barking...");
+            }
+        
+            // Implémentation de la méthode abstraite
+            public override void MakeSound()
+            {
+                Console.WriteLine("Barking...");
+            }
+        }
+        
+        // Utilisation de l'héritage
+        Dog dog = new Dog();
+        dog.Eat(); // Hérité de Animal
+        dog.Bark(); // Défini dans Dog
+        dog.MakeSound(); // Implémentation de la méthode abstraite
+                        </code></pre>
+            </li>
+            <li>Aide mémoire:
+                <p class="metaphor">L'héritage est comme hériter des caractéristiques de vos parents. Les méthodes
+                    virtuelles et abstraites permettent de personnaliser et d'étendre ces caractéristiques.</p>
+            </li>
+        </ul>
+    </details>
+</div>
+
+
+<div class="details">
+    <details>
+        <summary>Interfaces</summary>
+        <p>Les interfaces définissent un contrat que les classes doivent suivre. Elles ne contiennent pas
+            d'implémentation, seulement des signatures de méthodes.</p>
+        <ul>
+            <li>Définition d'une interface:
+                <pre><code class="language-csharp">
+                // Définition d'une interface
+                public interface IFlyable
+                {
+                    void Fly();
+                }
+                
+                // Implémentation de l'interface
+                public class Bird : IFlyable
+                {
+                    public void Fly()
+                    {
+                        Console.WriteLine("Flying...");
+                    }
+                }
+                                    </code></pre>
+            </li>
+            <li>Aide mémoire:
+                <p class="metaphor">Pensez à une interface comme à un contrat que les classes doivent respecter.</p>
+            </li>
+        </ul>
+    </details>
+</div>
+
+<div class="details">
+    <details>
+        <summary>Fonctions Asynchrones</summary>
+        <p>Les fonctions asynchrones permettent d'exécuter des tâches de manière non bloquante, ce qui est utile
+            pour les opérations d'E/S ou les tâches longues.</p>
+        <ul>
+            <li>Exemple de fonction asynchrone:
+                <pre><code class="language-csharp">
+                // Définition d'une fonction asynchrone
+                public async Task<string> GetDataAsync()
+                {
+                    await Task.Delay(1000); // Simule une opération asynchrone
+                    return "Data received";
+                }
+                
+                // Appel de la fonction asynchrone
+                public async void FetchData()
+                {
+                    string data = await GetDataAsync();
+                    Console.WriteLine(data); // Affiche "Data received"
+                }
+                                    </code></pre>
+            </li>
+            <li>Aide mémoire:
+                <p class="metaphor">Les fonctions asynchrones sont comme commander un repas et continuer à faire
+                    autre chose jusqu'à ce que le repas soit prêt.</p>
+            </li>
+        </ul>
+    </details>
+</div>
+
+<div class="details">
+    <details>
+        <summary>Propriétés et Indexeurs</summary>
+        <p>Les propriétés permettent de contrôler l'accès aux champs d'une classe. Les indexeurs permettent aux
+            instances de classe d'être indexées comme des tableaux.</p>
+        <ul>
+            <li>Exemple de propriété:
+                <pre><code class="language-csharp">
+                // Définition d'une propriété
+                public class Person
+                {
+                    private string name;
+                
+                    public string Name
+                    {
+                        get { return name; }
+                        set { name = value; }
+                    }
+                }
+                                    </code></pre>
+            </li>
+            <li>Exemple d'indexeur:
+                <pre><code class="language-csharp">
+                // Définition d'un indexeur
+                public class SampleCollection<T>
+                {
+                    private T[] arr = new T[100];
+                
+                    public T this[int i]
+                    {
+                        get { return arr[i]; }
+                        set { arr[i] = value; }
+                    }
+                }
+                                    </code></pre>
+            </li>
+            <li>Aide mémoire:
+                <p class="metaphor">Les propriétés sont comme des portes avec des serrures, et les indexeurs sont
+                    comme des boîtes aux lettres.</p>
+            </li>
+        </ul>
+    </details>
+</div>
+
+<div class="details">
+    <details>
+        <summary>Exceptions et Gestion des Erreurs</summary>
+        <p>Les exceptions sont utilisées pour gérer les erreurs qui se produisent pendant l'exécution d'un
+            programme.</p>
+        <ul>
+            <li>Exemple de gestion des exceptions:
+                <pre><code class="language-csharp">
+                // Gestion des exceptions avec try-catch
+                try
+                {
+                    int result = 10 / 0;
+                }
+                catch (DivideByZeroException ex)
+                {
+                    Console.WriteLine("Cannot divide by zero!");
+                }
+                                    </code></pre>
+            </li>
+            <li>Aide mémoire:
+                <p class="metaphor">Les exceptions sont comme des panneaux de signalisation qui vous avertissent des
+                    dangers sur la route.</p>
+            </li>
+        </ul>
+    </details>
+</div>
+
+<div class="details">
+    <details>
+        <summary>Délegués et Événements</summary>
+        <p>Les délégués sont des types qui représentent des références à des méthodes. Les événements permettent aux
+            objets de notifier d'autres objets lorsqu'une action se produit.</p>
+        <ul>
+            <li>Exemple de délégué:
+                <pre><code class="language-csharp">
+                // Définition d'un délégué
+                public delegate void Notify();
+                
+                // Utilisation d'un délégué
+                public class ProcessBusinessLogic
+                {
+                    public event Notify ProcessCompleted;
+                
+                    public void StartProcess()
+                    {
+                        // Traitement
+                        OnProcessCompleted();
+                    }
+                
+                    protected virtual void OnProcessCompleted()
+                    {
+                        ProcessCompleted?.Invoke();
+                    }
+                }
+                                    </code></pre>
+            </li>
+            <li>Aide mémoire:
+                <p class="metaphor">Les délégués sont comme des télécommandes pour appeler des méthodes, et les
+                    événements sont comme des notifications push.</p>
+            </li>
+        </ul>
+    </details>
+</div>
+
+<div class="details">
+    <details>
+        <summary>Expressions Lambda et LINQ</summary>
+        <p>Les expressions lambda sont des fonctions anonymes utilisées pour créer des délégués ou des expressions
+            arborescentes. LINQ (Language Integrated Query) est un ensemble de méthodes pour interroger des collections.
+        </p>
+        <ul>
+            <li>Exemple d'expression lambda:
+                <pre><code class="language-csharp">
+                // Utilisation d'une expression lambda
+                Func<int, int, int> add = (x, y) => x + y;
+                Console.WriteLine(add(2, 3)); // Affiche 5
+                                </code></pre>
+            </li>
+            <li>Exemple de requête LINQ:
+                <pre><code class="language-csharp">
+                // Utilisation de LINQ pour filtrer une collection
+                int[] numbers = { 1, 2, 3, 4, 5 };
+                var evenNumbers = numbers.Where(n => n % 2 == 0);
+                foreach (var num in evenNumbers)
+                {
+                    Console.WriteLine(num); // Affiche 2 et 4
+                }
+                                </code></pre>
+            </li>
+            <li>Aide mémoire:
+                <p class="metaphor">Les expressions lambda sont comme des raccourcis pour écrire des fonctions, et LINQ
+                    est comme un moteur de recherche pour vos collections de données.</p>
+            </li>
+        </ul>
+    </details>
+</div>
+
+<div class="details">
+    <details>
+        <summary>Blocs try, catch, et finally</summary>
+        <p>Les blocs `try`, `catch`, et `finally` sont utilisés pour gérer les exceptions et nettoyer les ressources.
+        </p>
+        <ul>
+            <li>Exemple de gestion des exceptions:
+                <pre><code class="language-csharp">
+                // Gestion des exceptions avec try-catch-finally
+                try
+                {
+                    int result = 10 / 0;
+                }
+                catch (DivideByZeroException ex)
+                {
+                    Console.WriteLine("Cannot divide by zero!");
+                }
+                finally
+                {
+                    Console.WriteLine("This block is always executed.");
+                }
+                                </code></pre>
+            </li>
+            <li>Aide mémoire:
+                <p class="metaphor">Pensez aux blocs `try`, `catch`, et `finally` comme à un filet de sécurité pour
+                    attraper les erreurs et nettoyer après l'exécution.</p>
+            </li>
+        </ul>
+    </details>
+</div>
+
+<div class="details">
+    <details>
+        <summary>Types Anonymes</summary>
+        <p>Les types anonymes permettent de créer des objets sans avoir à définir explicitement une classe.</p>
+        <ul>
+            <li>Exemple de type anonyme:
+                <pre><code class="language-csharp">
+                // Création d'un type anonyme
+                var person = new { FirstName = "John", LastName = "Doe" };
+                Console.WriteLine($"{person.FirstName} {person.LastName}"); // Affiche "John Doe"
+                                </code></pre>
+            </li>
+            <li>Aide mémoire:
+                <p class="metaphor">Les types anonymes sont comme des notes adhésives pour stocker rapidement des
+                    informations.</p>
+            </li>
+        </ul>
+    </details>
+</div>
+
+<div class="details">
+    <details>
+        <summary>Types Nullable</summary>
+        <p>Les types nullable permettent de représenter des valeurs de types de valeur qui peuvent être nulles.</p>
+        <ul>
+            <li>Exemple de type nullable:
+                <pre><code class="language-csharp">
+                // Utilisation de types nullable
+                int? nullableInt = null;
+                if (nullableInt.HasValue)
+                {
+                    Console.WriteLine(nullableInt.Value);
+                }
+                else
+                {
+                    Console.WriteLine("Value is null");
+                }
+                                </code></pre>
+            </li>
+            <li>Aide mémoire:
+                <p class="metaphor">Les types nullable sont comme des cases à cocher qui peuvent être cochées ou non.
+                </p>
+            </li>
+        </ul>
+    </details>
+</div>
+
+<div class="details">
+    <details>
+        <summary>Pattern Matching</summary>
+        <p>Le pattern matching permet de comparer une valeur avec un modèle et d'exécuter du code en fonction du
+            résultat.</p>
+        <ul>
+            <li>Exemple de pattern matching:
+                <pre><code class="language-csharp">
+                // Utilisation du pattern matching
+                object obj = "Hello, World!";
+                if (obj is string str)
+                {
+                    Console.WriteLine(str); // Affiche "Hello, World!"
+                }
+                                </code></pre>
+            </li>
+            <li>Aide mémoire:
+                <p class="metaphor">Le pattern matching est comme un détective qui identifie des objets et agit en
+                    conséquence.</p>
+            </li>
+        </ul>
+    </details>
+</div>
+
+<div class="details">
+    <details>
+        <summary>Tuples</summary>
+        <p>Les tuples permettent de regrouper plusieurs valeurs dans une seule structure de données.</p>
+        <ul>
+            <li>Exemple de tuple:
+                <pre><code class="language-csharp">
+                // Création et utilisation d'un tuple
+                var tuple = (FirstName: "John", LastName: "Doe");
+                Console.WriteLine($"{tuple.FirstName} {tuple.LastName}"); // Affiche "John Doe"
+                                </code></pre>
+            </li>
+            <li>Aide mémoire:
+                <p class="metaphor">Les tuples sont comme des sacs à dos pour transporter plusieurs éléments ensemble.
+                </p>
+            </li>
+        </ul>
+    </details>
+</div>
+
+<div class="details">
+    <details>
+        <summary>Records</summary>
+        <p>Les records sont des types de référence immuables qui permettent de créer des objets avec des valeurs
+            immuables.</p>
+        <ul>
+            <li>Exemple de record:
+                <pre><code class="language-csharp">
+                // Définition et utilisation d'un record
+                public record Person(string FirstName, string LastName);
+                
+                var person = new Person("John", "Doe");
+                Console.WriteLine($"{person.FirstName} {person.LastName}"); // Affiche "John Doe"
+                                </code></pre>
+            </li>
+            <li>Aide mémoire:
+                <p class="metaphor">Les records sont comme des cartes d'identité avec des informations immuables.</p>
+            </li>
+        </ul>
+    </details>
+</div>
+
+<div class="details">
+    <details>
+        <summary>Opérateurs</summary>
+        <p>Les opérateurs sont utilisés pour effectuer des opérations sur des variables et des valeurs.</p>
+        <ul>
+            <li>Opérateurs arithmétiques:
+                <pre><code class="language-csharp">
+                // Exemples d'opérateurs arithmétiques
+                int a = 5;
+                int b = 3;
+                Console.WriteLine(a + b); // Addition: 8
+                Console.WriteLine(a - b); // Soustraction: 2
+                Console.WriteLine(a * b); // Multiplication: 15
+                Console.WriteLine(a / b); // Division: 1
+                Console.WriteLine(a % b); // Modulo: 2
+                                </code></pre>
+            </li>
+            <li>Opérateurs de comparaison:
+                <pre><code class="language-csharp">
+                // Exemples d'opérateurs de comparaison
+                Console.WriteLine(a == b); // Égalité: False
+                Console.WriteLine(a != b); // Inégalité: True
+                Console.WriteLine(a > b);  // Supérieur: True
+                Console.WriteLine(a < b);  // Inférieur: False
+                Console.WriteLine(a >= b); // Supérieur ou égal: True
+                Console.WriteLine(a <= b); // Inférieur ou égal: False
+                                </code></pre>
+            </li>
+            <li>Opérateurs logiques:
+                <pre><code class="language-csharp">
+                // Exemples d'opérateurs logiques
+                bool x = true;
+                bool y = false;
+                Console.WriteLine(x && y); // ET logique: False
+                Console.WriteLine(x || y); // OU logique: True
+                Console.WriteLine(!x);     // NON logique: False
+                                </code></pre>
+            </li>
+            <li>Aide mémoire:
+                <p class="metaphor">Les opérateurs sont comme des outils pour manipuler et comparer des valeurs.</p>
+            </li>
+        </ul>
+    </details>
+</div>
+<div class="details">
+    <details>
+        <summary>Attributs en C#</summary>
+        <p>Les attributs en C# permettent d'ajouter des métadonnées à vos classes, propriétés, méthodes, etc. Voici une
+            liste des attributs les plus couramment utilisés, suivie d'une liste plus exhaustive.</p>
+
+        <h3>Attributs Couramment Utilisés</h3>
+        <ul>
+            <li><strong>[Serializable]</strong> : Indique que la classe peut être sérialisée.
+                <pre><code class="language-csharp">
+                        [Serializable]
+                        public class Person
+                        {
+                            public string FirstName { get; set; }
+                            public string LastName { get; set; }
+                        }
+                                        </code></pre>
+            </li>
+            <li><strong>[Obsolete]</strong> : Marque un élément comme obsolète.
+                <pre><code class="language-csharp">
+                        [Obsolete("Use NewMethod instead")]
+                        public void OldMethod()
+                        {
+                            Console.WriteLine("This method is obsolete.");
+                        }
+                                        </code></pre>
+            </li>
+            <li><strong>[DataContract]</strong> et <strong>[DataMember]</strong> : Utilisés pour la sérialisation de
+                données.
+                <pre><code class="language-csharp">
+                        [DataContract]
+                        public class Person
+                        {
+                            [DataMember]
+                            public string FirstName { get; set; }
+                            [DataMember]
+                            public string LastName { get; set; }
+                        }
+                                        </code></pre>
+            </li>
+            <li><strong>[Required]</strong> : Indique qu'une propriété est obligatoire (utilisé principalement avec les
+                frameworks de validation).
+                <pre><code class="language-csharp">
+                        public class Person
+                        {
+                            [Required]
+                            public string FirstName { get; set; }
+                        }
+                                        </code></pre>
+            </li>
+            <li><strong>[DllImport]</strong> : Utilisé pour appeler des fonctions non managées dans des DLL.
+                <pre><code class="language-csharp">
+                        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+                        public static extern int MessageBox(IntPtr hWnd, String text, String caption, uint type);
+                                        </code></pre>
+            </li>
+            <li><strong>[MethodImpl]</strong> : Spécifie les détails de l'implémentation d'une méthode.
+                <pre><code class="language-csharp">
+                        [MethodImpl(MethodImplOptions.Synchronized)]
+                        public void SynchronizedMethod()
+                        {
+                            // Code
+                        }
+                                        </code></pre>
+            </li>
+        </ul>
+
+        <h3>Autres Attributs Utilisables</h3>
+        <ul>
+            <li><strong>[Conditional]</strong> : Spécifie qu'une méthode est conditionnelle.
+                <pre><code class="language-csharp">
+                        [Conditional("DEBUG")]
+                        public void DebugOnlyMethod()
+                        {
+                            // Code
+                        }
+                                        </code></pre>
+            </li>
+            <li><strong>[Flags]</strong> : Indique qu'une énumération peut être traitée comme un ensemble de bits.
+                <pre><code class="language-csharp">
+                        [Flags]
+                        public enum Days
+                        {
+                            None = 0,
+                            Sunday = 1,
+                            Monday = 2,
+                            Tuesday = 4,
+                            Wednesday = 8,
+                            Thursday = 16,
+                            Friday = 32,
+                            Saturday = 64
+                        }
+                                        </code></pre>
+            </li>
+            <li><strong>[DebuggerStepThrough]</strong> : Indique au débogueur de ne pas arrêter dans la méthode.
+                <pre><code class="language-csharp">
+                        [DebuggerStepThrough]
+                        public void Method()
+                        {
+                            // Code
+                        }
+                                        </code></pre>
+            </li>
+            <li><strong>[CallerMemberName]</strong>, <strong>[CallerFilePath]</strong>, et
+                <strong>[CallerLineNumber]</strong> : Utilisés pour obtenir des informations sur l'appelant.
+                <pre><code class="language-csharp">
+                        public void Log(string message, [CallerMemberName] string memberName = "", [CallerFilePath] string filePath = "", [CallerLineNumber] int lineNumber = 0)
+                        {
+                            Console.WriteLine($"Message: {message}, Member: {memberName}, File: {filePath}, Line: {lineNumber}");
+                        }
+                                        </code></pre>
+            </li>
+            <li><strong>[ThreadStatic]</strong> : Indique qu'une variable statique est spécifique à un thread.
+                <pre><code class="language-csharp">
+                        [ThreadStatic]
+                        public static int ThreadSpecificData;
+                                        </code></pre>
+            </li>
+            <li><strong>[CLSCompliant]</strong> : Indique que le code est conforme aux spécifications du Common Language
+                Specification (CLS).
+                <pre><code class="language-csharp">
+                        [CLSCompliant(true)]
+                        public class MyClass
+                        {
+                            // Code
+                        }
+                                        </code></pre>
+            </li>
+            <li><strong>[AssemblyVersion]</strong> : Spécifie la version de l'assembly.
+                <pre><code class="language-csharp">
+                        [assembly: AssemblyVersion("1.0.0.0")]
+                                        </code></pre>
+            </li>
+            <li><strong>[AssemblyFileVersion]</strong> : Spécifie la version du fichier de l'assembly.
+                <pre><code class="language-csharp">
+                        [assembly: AssemblyFileVersion("1.0.0.0")]
+                                        </code></pre>
+            </li>
+            <li><strong>[ComVisible]</strong> : Indique si un assembly est visible pour COM.
+                <pre><code class="language-csharp">
+                        [assembly: ComVisible(true)]
+                                        </code></pre>
+            </li>
+            <li><strong>[Guid]</strong> : Spécifie le GUID pour un assembly ou une interface.
+                <pre><code class="language-csharp">
+                        [assembly: Guid("12345678-1234-1234-1234-1234567890ab")]
+                                        </code></pre>
+            </li>
+        </ul>
+        </details>
+        </div>
+        <!-- Ajoutez d'autres sections de fonctionnalités ici -->

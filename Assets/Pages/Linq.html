@@ -1,0 +1,394 @@
+<meta name="tags" content="C#,LINQ">
+
+<h2>LINQ (Language Integrated Query)</h2>
+<p>LINQ est une fonctionnalité puissante de C# qui permet de faire des requêtes sur des collections de données de
+    manière concise et lisible.</p>
+
+<body>
+    <div class="details">
+        <details>
+            <summary>Filtrage</summary>
+            <ul>
+                <pre><code class="language-csharp">
+// Filtrage avec LINQ
+int[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+var evenNumbers = numbers.Where(n => n % 2 == 0).ToList();
+</code></pre>
+                <details>
+                    <summary>Explication</summary>
+                    <p>Le filtrage avec LINQ permet de sélectionner des éléments d'une collection qui répondent à
+                        une
+                        condition spécifique. Dans cet exemple, nous sélectionnons les nombres pairs.</p>
+                </details>
+            </ul>
+        </details>
+    </div>
+    <div class="details">
+        <details>
+            <summary>Projection</summary>
+            <ul>
+                <pre><code class="language-csharp">
+// Projection avec LINQ
+string[] words = { "apple", "banana", "cherry" };
+var upperWords = words.Select(w => w.ToUpper()).ToList();
+</code></pre>
+                <details>
+                    <summary>Explication</summary>
+                    <p>La projection avec LINQ permet de transformer chaque élément d'une collection. Dans cet
+                        exemple,
+                        nous convertissons chaque mot en majuscules.</p>
+                </details>
+            </ul>
+        </details>
+    </div>
+    <div class="details">
+        <details>
+            <summary>Tri</summary>
+            <ul>
+                <pre><code class="language-csharp">
+// Tri avec LINQ
+int[] numbers = { 5, 1, 8, 3, 2 };
+var sortedNumbers = numbers.OrderBy(n => n).ToList();
+</code></pre>
+                <details>
+                    <summary>Explication</summary>
+                    <p>Le tri avec LINQ permet de trier les éléments d'une collection. Dans cet exemple,
+                        nous trions
+                        les
+                        nombres dans l'ordre croissant.</p>
+                </details>
+            </ul>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>Groupement</summary>
+            <ul>
+                <pre><code class="language-csharp">
+// Groupement avec LINQ
+var students = new[]
+{
+new { Name = "Alice", Grade = 90 },
+new { Name = "Bob", Grade = 85 },
+new { Name = "Charlie", Grade = 90 }
+};
+var groupedStudents = students.GroupBy(s => s.Grade);
+</code></pre>
+                <details>
+                    <summary>Explication</summary>
+                    <p>Le groupement avec LINQ permet de regrouper les éléments d'une collection
+                        en
+                        fonction d'une
+                        clé.
+                        Dans cet exemple, nous regroupons les étudiants par note.</p>
+                </details>
+            </ul>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>Jointure</summary>
+            <ul>
+                <pre><code class="language-csharp">
+// Jointure avec LINQ
+var students = new[]
+{
+new { StudentId = 1, Name = "Alice" },
+new { StudentId = 2, Name = "Bob" }
+};
+var scores = new[]
+{
+new { StudentId = 1, Score = 90 },
+new { StudentId = 2, Score = 85 }
+};
+var studentScores = students.Join(scores,
+student => student.StudentId,
+score => score.StudentId,
+(student, score) => new { student.Name, score.Score }).ToList();
+</code></pre>
+                <details>
+                    <summary>Explication</summary>
+                    <p>La jointure avec LINQ permet de combiner des éléments de deux
+                        collections en
+                        fonction d'une
+                        clé
+                        commune. Dans cet exemple, nous combinons les étudiants avec
+                        leurs scores.
+                    </p>
+                </details>
+                </li>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>Aggregation</summary>
+            <ul>
+                <pre><code class="language-csharp">
+// Agrégation avec LINQ
+int[] numbers = { 1, 2, 3, 4, 5 };
+int sum = numbers.Sum();
+</code></pre>
+                <details>
+                    <summary>Explication</summary>
+                    <p>L'agrégation avec LINQ permet de calculer une valeur
+                        agrégée à partir
+                        d'une collection. Dans
+                        cet
+                        exemple, nous calculons la somme des nombres.</p>
+                </details>
+            </ul>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>Conversion</summary>
+            <ul>
+                <pre><code class="language-csharp">
+// Conversion avec LINQ
+int[] numbers = { 1, 2, 3, 4, 5 };
+List<int> numberList = numbers.ToList();
+</code></pre>
+                <details>
+                    <summary>Explication</summary>
+                    <p>La conversion avec LINQ permet de convertir une
+                        collection en un
+                        autre type de collection.
+                        Dans
+                        cet exemple, nous convertissons un tableau en
+                        une liste.</p>
+                </details>
+            </ul>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>Concaténation</summary>
+            <ul>
+                <pre><code class="language-csharp">
+// Concaténation avec LINQ
+int[] numbers1 = { 1, 2, 3 };
+int[] numbers2 = { 4, 5, 6 };
+var concatenatedNumbers = numbers1.Concat(numbers2).ToList();
+</code></pre>
+                <details>
+                    <summary>Explication</summary>
+                    <p>La concaténation avec LINQ permet de
+                        combiner deux collections en
+                        une seule. Dans cet
+                        exemple,
+                        nous combinons deux tableaux de nombres.
+                    </p>
+                </details>
+            </ul>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>Union</summary>
+            <ul>
+                <pre><code class="language-csharp">
+// Union avec LINQ
+int[] numbers1 = { 1, 2, 3 };
+int[] numbers2 = { 3, 4, 5 };
+var unionNumbers = numbers1.Union(numbers2).ToList();
+</code></pre>
+                <details>
+                    <summary>Explication</summary>
+                    <p>L'union avec LINQ permet de
+                        combiner deux collections en une
+                        seule, en éliminant les
+                        doublons.
+                        Dans cet exemple, nous combinons
+                        deux tableaux de nombres et
+                        éliminons les doublons.</p>
+                </details>
+            </ul>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>Intersection</summary>
+            <ul>
+                <pre><code class="language-csharp">
+// Intersection avec LINQ
+int[] numbers1 = { 1, 2, 3 };
+int[] numbers2 = { 3, 4, 5 };
+var intersectNumbers = numbers1.Intersect(numbers2).ToList();
+</code></pre>
+                <details>
+                    <summary>Explication
+                    </summary>
+                    <p>L'intersection avec LINQ
+                        permet de trouver les
+                        éléments
+                        communs entre deux
+                        collections. Dans
+                        cet
+                        exemple, nous trouvons
+                        les nombres communs
+                        entre deux
+                        tableaux.</p>
+                </details>
+            </ul>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>Différence
+            </summary>
+            <ul>
+                <pre><code class="language-csharp">
+// Différence avec LINQ
+int[] numbers1 = { 1, 2, 3 };
+int[] numbers2 = { 3, 4, 5 };
+var exceptNumbers = numbers1.Except(numbers2).ToList();
+</code></pre>
+                <details>
+                    <summary>Explication
+                    </summary>
+                    <p>La différence
+                        avec LINQ permet
+                        de trouver les
+                        éléments
+                        présents dans
+                        une collection
+                        mais pas
+                        dans
+                        l'autre. Dans
+                        cet exemple,
+                        nous trouvons
+                        les nombres
+                        présents dans le
+                        premier tableau
+                        mais
+                        pas
+                        dans le second.
+                    </p>
+                </details>
+            </ul>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>
+                Quantification
+            </summary>
+            <ul>
+                <pre><code class="language-csharp">
+// Quantification avec LINQ
+int[] numbers = { 1, 2, 3, 4, 5 };
+bool allEven = numbers.All(n => n % 2 == 0);
+bool anyEven = numbers.Any(n => n % 2 == 0);
+</code></pre>
+                <details>
+                    <summary>
+                        Explication
+                    </summary>
+                    <p>La
+                        quantification
+                        avec
+                        LINQ
+                        permet
+                        de
+                        vérifier
+                        si
+                        tous les
+                        éléments
+                        ou au
+                        moins un
+                        élément
+                        d'une
+                        collection
+                        répondent
+                        à une
+                        condition.
+                        Dans cet
+                        exemple,
+                        nous
+                        vérifions
+                        si tous
+                        les
+                        nombres
+                        sont
+                        pairs et
+                        si au
+                        moins un
+                        nombre
+                        est
+                        pair.
+                    </p>
+                </details>
+            </ul>
+        </details>
+    </div>
+
+    <div class="details">
+        <details>
+            <summary>
+                Partitionnement
+            </summary>
+            <ul>
+                <pre><code class="language-csharp">
+// Partitionnement avec LINQ
+int[] numbers = { 1, 2, 3, 4, 5 };
+var firstTwoNumbers = numbers.Take(2).ToList();
+var skipTwoNumbers = numbers.Skip(2).ToList();
+</code></pre>
+                <details>
+                    <summary>
+                        Explication
+                    </summary>
+                    <p>Le
+                        partitionnement
+                        avec
+                        LINQ
+                        permet
+                        de
+                        sélectionner
+                        un
+                        nombre
+                        spécifique
+                        d'éléments
+                        au
+                        début
+                        ou
+                        d'ignorer
+                        un
+                        nombre
+                        spécifique
+                        d'éléments
+                        au
+                        début
+                        d'une
+                        collection.
+                        Dans
+                        cet
+                        exemple,
+                        nous
+                        prenons
+                        les
+                        deux
+                        premiers
+                        nombres
+                        et
+                        ignorons
+                        les
+                        deux
+                        premiers
+                        nombres.
+                    </p>
+                </details>
+            </ul>
+        </details>
+    </div>
+
+</body>

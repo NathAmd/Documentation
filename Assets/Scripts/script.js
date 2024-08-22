@@ -13,8 +13,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             })
             .then(html => {
-                content.innerHTML = html;
-                highlightPath(module);
+                content.innerHTML = html
+                Prism.highlightAll()
+                highlightPath(module)
             });
     }
 
